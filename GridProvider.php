@@ -36,6 +36,13 @@ class GridProvider
 			$column->addColumn($grid);
 		}
 		
+//		foreach($grid->columns as $column) {
+//			dump($column);
+//			$column->setDefaultHide(true);
+//		}
+		
+		
+		
 //		return $this->columnSorter->sort($this->services);
 		return $grid;
 	}

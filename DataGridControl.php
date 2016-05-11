@@ -4,6 +4,10 @@ namespace Wame\DataGridControl;
 
 use Ublaboo\DataGrid\DataGrid;
 
+use Kdyby\Doctrine\EntityManager;
+//use Doctrine\ORM\EntityManager;
+use Wame\Utils\Entity\Serializer;
+
 class DataGridControl extends \Nette\Application\UI\Control
 {
 	/** @var array */
@@ -14,6 +18,24 @@ class DataGridControl extends \Nette\Application\UI\Control
 	
 	public $presenterName;
 	
+	public $entityManager;
+	
+	public $name;
+	
+	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL, EntityManager $entityManager) {
+//		parent::__construct($parent, $name);
+		$this->entityManager = $entityManager;
+	}
+	
+	public function setName($name)
+	{
+		$this->name = $name;
+	}
+	
+	public function getName()
+	{
+		return $this->name;
+	}
 	
 	public function setProvider($provider) {
 		$this->providers[] = $provider;
@@ -27,6 +49,15 @@ class DataGridControl extends \Nette\Application\UI\Control
 			$this->source[$s->id] = $s;
 		}
 	}
+	
+//	public function setDataSource($source)
+//	{
+//		$serializer = new Serializer($this->entityManager); // Pass the EntityManager object
+//		
+//		foreach($source as $s) {
+//			$this->source[$s->id] = $serializer->serialize($s);
+//		}
+//	}
 	
 	public function getDataSource()
 	{
@@ -48,6 +79,7 @@ class DataGridControl extends \Nette\Application\UI\Control
 		$grid->setColumnsHideable();
 		$grid->setTemplateFile(__DIR__ . '/templates/admin.latte');
 		$grid->setDataSource($this->source);
+//		$grid->setDataSource(new \Ublaboo\DataGrid\DataSource\DoctrineDataSource($this->source, 'id'));
 		
 		foreach($this->providers as $provider) {
 			$provider->getColumns($grid);

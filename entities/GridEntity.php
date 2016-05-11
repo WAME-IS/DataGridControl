@@ -1,38 +1,20 @@
 <?php
 
-namespace Wame\ArticleModule\Entities;
+namespace Wame\DataGridControl\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="wame_article")
+ * @ORM\Table(name="wame_grid")
  * @ORM\Entity
  */
-class ArticleEntity extends \Wame\Core\Entities\BaseEntity 
+class GridEntity extends \Wame\Core\Entities\BaseEntity 
 {
 	use \Wame\Core\Entities\Columns\Identifier;
-	use \Wame\Core\Entities\Columns\CreateDate;
-	use \Wame\Core\Entities\Columns\Status;
-
-	/**
-     * @ORM\OneToMany(targetEntity="ArticleLangEntity", mappedBy="article")
-     */
-    protected $langs;
+	use \Wame\Core\Entities\Columns\Parameters;
 	
 	/**
-	 * @ORM\Column(name="publish_start_date", type="datetime", nullable=true)
+	 * @ORM\Column(name="type", type="string", nullable=false)
 	 */
-	protected $publishStartDate;
-
-	/**
-	 * @ORM\Column(name="publish_end_date", type="datetime", nullable=true)
-	 */
-	protected $publishEndDate;
-	
-	
-//	public function getPublishStartDate()
-//	{
-//		return $this->publishStartDate;
-//	}
-
+	protected $type;
 }
