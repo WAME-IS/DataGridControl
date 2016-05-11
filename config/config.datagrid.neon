@@ -1,0 +1,3 @@
+services:
+	- Wame\DataGridControl\DataGridControl
+	- Wame\DataGridControl\Repositories\GridRepository
