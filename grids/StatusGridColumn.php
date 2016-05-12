@@ -10,7 +10,7 @@ class StatusGridColumn extends BaseGridColumn
 		$this->items = $this->getItems($grid);
 		
 		$grid->addColumnStatus('status', 'Status')
-				->setTemplate(__DIR__ . './../templates/column_status.latte')
+				->setTemplate(__DIR__ . '/../templates/column_status.latte')
 				->addOption(1, 'Published')
 					->setIcon('check')
 					->setClass('btn-success')
