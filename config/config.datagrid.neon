@@ -1,5 +1,6 @@
 services:
 	- Wame\DataGridControl\DataGridControl
+	- Wame\DataGridControl\IDataGridControlFactory
 
 	# Entities
 	- Wame\DataGridControl\Entities\GridEntity
@@ -11,3 +12,16 @@ doctrine:
 	metadata:
 		Wame\DataGridControl\Entities: %appDir%/../vendor/wame/DataGridControl/entities
 		Wame\DataGridControl\Repositories: %appDir%/../vendor/wame/DataGridControl/repositories
+
+webloader:
+    css:
+        admin:
+            files:
+                - %appDir%/../web/datagrid/datagrid.min.css
+                - %appDir%/../web/datagrid/datagrid-spinners.min.css
+
+    js:
+        admin:
+            files:
+                - %appDir%/../web/datagrid/datagrid.min.js
+                - %appDir%/../web/datagrid/datagrid-spinners.min.js

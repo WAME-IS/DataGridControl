@@ -5,8 +5,16 @@ namespace Wame\DataGridControl;
 use Ublaboo\DataGrid\DataGrid;
 
 use Kdyby\Doctrine\EntityManager;
-//use Doctrine\ORM\EntityManager;
-use Wame\Utils\Entity\Serializer;
+
+interface IDataGridControlFactory
+{
+
+	/**
+	 * @return DataGridControl
+	 */
+	function create();
+
+}
 
 class DataGridControl extends \Nette\Application\UI\Control
 {
@@ -20,21 +28,21 @@ class DataGridControl extends \Nette\Application\UI\Control
 	
 	public $entityManager;
 	
-	public $name;
+	public $gridName;
 	
 	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL, EntityManager $entityManager) {
 //		parent::__construct($parent, $name);
 		$this->entityManager = $entityManager;
 	}
 	
-	public function setName($name)
+	public function setGridName($gridName)
 	{
-		$this->name = $name;
+		$this->gridName = $gridName;
 	}
 	
-	public function getName()
+	public function getGridName()
 	{
-		return $this->name;
+		return $this->gridName;
 	}
 	
 	public function setProvider($provider) {

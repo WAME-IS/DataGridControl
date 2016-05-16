@@ -28,7 +28,7 @@ abstract class BaseGridColumn {
 	
 	protected function isHidden($grid, $column)
 	{
-		$gridEntity = $this->gridRepository->get(['type' => $grid->parent->getName()]);
+		$gridEntity = $this->gridRepository->get(['type' => $grid->parent->getGridName()]);
 		return $gridEntity->getParameter($column)['hidden'];
 	}
 }
