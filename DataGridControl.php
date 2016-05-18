@@ -19,7 +19,7 @@ interface IDataGridControlFactory
 class DataGridControl extends \Nette\Application\UI\Control
 {
 	/** @var array */
-	private $source;
+	private $source = [];
 	
 	/** @var array */
 	private $providers = [];
