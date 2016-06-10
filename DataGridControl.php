@@ -30,10 +30,15 @@ class DataGridControl extends \Nette\Application\UI\Control
 	
 	public $gridName;
 	
+	/** @persistent */
+	public $type;
+	
+	
 	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL, EntityManager $entityManager) {
 //		parent::__construct($parent, $name);
 		$this->entityManager = $entityManager;
 	}
+	
 	
 	public function setGridName($gridName)
 	{
@@ -93,4 +98,10 @@ class DataGridControl extends \Nette\Application\UI\Control
 			$provider->getColumns($grid);
 		}
 	}
+	
+	public function loadState( array $params )
+    {
+        parent::loadState( $params );
+    }
+	
 }
