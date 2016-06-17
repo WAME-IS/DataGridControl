@@ -106,9 +106,14 @@ class DataGridControl extends \Nette\Application\UI\Control
 		$grid = new DataGrid($this, $name);
 		
 		$grid->setColumnsHideable();
-		$grid->setTemplateFile(__DIR__ . '/templates/admin.latte');
+//		$grid->setTemplateFactory($templateFactory);
+//		$grid->setTemplateFile(__DIR__ . '/templates/admin.latte');
 		$grid->setDataSource($this->source);
 //		$grid->setDataSource(new \Ublaboo\DataGrid\DataSource\DoctrineDataSource($this->source, 'id'));
+//		$grid->setOuterFilterRendering();
+        
+        $grid->setRememberState(FALSE);
+        $grid->setRefreshUrl(FALSE);
 		
 		foreach($this->providers as $provider) {
 			$provider->getColumns($grid);

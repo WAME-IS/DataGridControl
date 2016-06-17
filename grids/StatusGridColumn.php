@@ -9,13 +9,13 @@ class StatusGridColumn extends BaseGridColumn
 	public function addColumn($grid) {
 		$this->items = $this->getItems($grid);
 		
-		$grid->addColumnStatus('status', 'Status')
+		$grid->addColumnStatus('status', _('Status'))
 				->setTemplate(__DIR__ . '/../templates/column_status.latte')
-				->addOption(1, 'Published')
+				->addOption(1, _('Published'))
 					->setIcon('check')
 					->setClass('btn-success')
 					->endOption()
-				->addOption(2, 'Unpublished')
+				->addOption(2, _('Unpublished'))
 					->setIcon('close')
 					->setClass('btn-danger')
 					->endOption()
