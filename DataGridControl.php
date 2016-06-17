@@ -3,17 +3,12 @@
 namespace Wame\DataGridControl;
 
 use Ublaboo\DataGrid\DataGrid;
-
 use Kdyby\Doctrine\EntityManager;
 
 interface IDataGridControlFactory
 {
-
-	/**
-	 * @return DataGridControl
-	 */
+	/** @return DataGridControl */
 	function create();
-
 }
 
 class DataGridControl extends \Nette\Application\UI\Control
@@ -40,14 +35,13 @@ class DataGridControl extends \Nette\Application\UI\Control
 	}
 	
 	
+	/** setters ***************************************************************/
+	
 	public function setGridName($gridName)
 	{
 		$this->gridName = $gridName;
-	}
-	
-	public function getGridName()
-	{
-		return $this->gridName;
+		
+		return $this;
 	}
 	
 	public function setProvider($provider) {
@@ -61,6 +55,18 @@ class DataGridControl extends \Nette\Application\UI\Control
 		foreach($source as $s) {
 			$this->source[$s->id] = $s;
 		}
+		
+		return $this;
+	}
+	
+	/**
+	 * 
+	 * @param callable $getChildrenCallback			callback that will return particular children rows for given parent
+	 * @param string|callable $has_children_column	column name (or callback), that indicates whether the row has some children or not
+	 */
+	public function setTreeView($getChildrenCallback, $has_children_column)
+	{
+		$this->setTreeView($getChildrenCallback, $has_children_column);
 	}
 	
 //	public function setDataSource($source)
@@ -72,18 +78,28 @@ class DataGridControl extends \Nette\Application\UI\Control
 //		}
 //	}
 	
+	
+	/** getters ***************************************************************/
+	
+	public function getGridName()
+	{
+		return $this->gridName;
+	}
+	
 	public function getDataSource()
 	{
 		return $this->source;
 	}
-	
 	
 	public function render()
 	{
 		$this->template->render(__DIR__ . '/templates/default.latte');
 	}
 	
-	public function createComponentDataGrid($name)
+	
+	/** components ************************************************************/
+	
+	protected function createComponentDataGrid($name)
 	{
 		$this->presenterName = $this->presenter->name;
 		
