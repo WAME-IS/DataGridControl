@@ -8,22 +8,12 @@ class GridProvider
 	private $columns = [];
 	
 	
-//	/** @var ColumnSorder */
-//	private $columnSorter;
-	
-	
-	public function __construct(/*ColumnSorter $columnSoter*/) {
-//		$this->columnSorter = $columnSorter;
-	}
-	
-	
 	public function addColumn($column)
 	{
 		$this->columns[] = $column;
 		
 		return $this;
 	}
-	
 	
 	/**
 	 * Get columns from services
@@ -35,15 +25,7 @@ class GridProvider
 		{
 			$column->addColumn($grid);
 		}
-		
-//		foreach($grid->columns as $column) {
-//			dump($column);
-//			$column->setDefaultHide(true);
-//		}
-		
-		
-		
-//		return $this->columnSorter->sort($this->services);
+        
 		return $grid;
 	}
 	
