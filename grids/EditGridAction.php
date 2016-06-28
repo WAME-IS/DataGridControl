@@ -9,7 +9,7 @@ class EditGridAction extends BaseGridColumn
 		$grid->addAction('edit', '', ":{$grid->parent->presenterName}:edit")
 			->setIcon('edit')
 			->setTitle(_('Edit'))
-			->setClass('btn btn-xs btn-info ajax');
+			->setClass('btn btn-xs btn-info');
 		
 		return $grid;
 	}
