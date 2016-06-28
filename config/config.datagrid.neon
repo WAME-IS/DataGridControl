@@ -1,17 +1,16 @@
 services:
-	- Wame\DataGridControl\DataGridControl
-	- Wame\DataGridControl\IDataGridControlFactory
+    - Wame\DataGridControl\DataGridControl
+    - Wame\DataGridControl\IDataGridControlFactory
 
-	# Entities
-	- Wame\DataGridControl\Entities\GridEntity
+    # Entities
+    - Wame\DataGridControl\Entities\GridEntity
 
-	# Repositories
-	- Wame\DataGridControl\Repositories\GridRepository
+    # Repositories
+    - Wame\DataGridControl\Repositories\GridRepository
 
 doctrine:
-	metadata:
-		Wame\DataGridControl\Entities: %appDir%/../vendor/wame/DataGridControl/entities
-		Wame\DataGridControl\Repositories: %appDir%/../vendor/wame/DataGridControl/repositories
+    metadata:
+        Wame\DataGridControl\Entities: %appDir%/../vendor/wame/DataGridControl/entities
 
 webloader:
     css:
