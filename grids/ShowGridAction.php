@@ -9,7 +9,7 @@ class ShowGridAction extends BaseGridColumn
 		$grid->addAction('show', '', ":{$grid->parent->presenterName}:show")
 			->setIcon('eye')
 			->setTitle(_('Show'))
-			->setClass('btn btn-xs btn-default ajax');
+			->setClass('btn btn-xs btn-default');
 		
 		return $grid;
 	}
