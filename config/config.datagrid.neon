@@ -2,9 +2,6 @@ services:
     - Wame\DataGridControl\DataGridControl
     - Wame\DataGridControl\IDataGridControlFactory
 
-    # Entities
-    - Wame\DataGridControl\Entities\GridEntity
-
     # Repositories
     - Wame\DataGridControl\Repositories\GridRepository
 
