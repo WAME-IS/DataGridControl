@@ -3,7 +3,6 @@
 namespace Wame\DataGridControl;
 
 use Ublaboo\DataGrid\DataGrid;
-use Kdyby\Doctrine\EntityManager;
 
 interface IDataGridControlFactory
 {
@@ -29,9 +28,9 @@ class DataGridControl extends \Nette\Application\UI\Control
 	public $type;
 	
 	
-	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL, EntityManager $entityManager) {
+	public function __construct(\Nette\ComponentModel\IContainer $parent = NULL, $name = NULL)
+    {
 //		parent::__construct($parent, $name);
-		$this->entityManager = $entityManager;
 	}
 	
 	
@@ -44,7 +43,8 @@ class DataGridControl extends \Nette\Application\UI\Control
 		return $this;
 	}
 	
-	public function setProvider($provider) {
+	public function setProvider($provider)
+    {
 		$this->providers[] = $provider;
 		
 		return $this;
@@ -52,9 +52,13 @@ class DataGridControl extends \Nette\Application\UI\Control
 	
 	public function setDataSource($source)
 	{
-		foreach($source as $s) {
-			$this->source[$s->id] = $s;
-		}
+//        if(is_array($source)) {
+//            foreach($source as $s) {
+//                $this->source[$s->id] = $s;
+//            }
+//        } else {
+            $this->source = $source;
+//        }
 		
 		return $this;
 	}
