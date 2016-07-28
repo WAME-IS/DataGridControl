@@ -4,11 +4,13 @@ namespace Wame\DataGridControl;
 
 class StatusGridColumn extends BaseGridColumn
 {
-	private $items;
-	
-	public function addColumn($grid) {
-		$this->items = $this->getItems($grid);
-		
+    private $grid;
+    
+    
+	public function addColumn($grid)
+    {
+        $this->grid = $grid;
+        
 		$grid->addColumnStatus('status', _('Status'))
 				->setTemplate(__DIR__ . '/../templates/column_status.latte')
 				->addOption(1, _('Published'))
@@ -26,7 +28,19 @@ class StatusGridColumn extends BaseGridColumn
 	
 	public function statusChange($id, $new_status)
 	{
-		$item = $this->items[$id];
-		$item->status = $new_status;
+        if($this->grid->getDataSource() instanceof \Doctrine\ORM\QueryBuilder) {
+            $query = $this->grid->getDataSource();
+            
+            $item = $query->andWhere("a.id = :id")
+                    ->setParameter('id', $id)
+                    ->getQuery()->getSingleResult();
+            
+            $item->status = $new_status;
+            
+            if ($this->grid->presenter->isAjax()) {
+                $this->grid->redrawItem($id);
+            }
+        }
 	}
+    
 }

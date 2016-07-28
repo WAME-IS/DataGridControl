@@ -6,7 +6,7 @@ class ShowGridAction extends BaseGridColumn
 {
 	public function addColumn($grid)
 	{
-		$grid->addAction('show', '', ":{$grid->parent->presenterName}:show")
+		$grid->addAction('show', '', ":{$grid->presenter->getName()}:show")
 			->setIcon('eye')
 			->setTitle(_('Show'))
 			->setClass('btn btn-xs btn-default');

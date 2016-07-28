@@ -6,11 +6,8 @@ class TitleGridColumn extends BaseGridColumn
 {
 	public function addColumn($grid) {
 		$grid->addColumnText('title', _('Title'))
-//				->setSortable()
-				->setRenderer(function($item) {
-					return $item->langs[$this->lang]->title;
-				})
-				->setFilterText();
+                ->setSortable('l0.title')
+				->setFilterText(['l0.title']);
 		
 		return $grid;
 	}

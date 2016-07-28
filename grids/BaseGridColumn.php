@@ -3,32 +3,26 @@
 namespace Wame\DataGridControl;
 
 
-abstract class BaseGridColumn {
-	abstract function addColumn($grid);
-	
-	public $lang;
-	
+abstract class BaseGridColumn
+{
+    public $gridRepository;
+    
 	protected $hidden = FALSE;
 	
-	protected $type = 'article';
-	
-	public $gridRepository;
-	
-	public function __construct(Repositories\GridRepository $gridRepository) {
+    
+	public function __construct(Repositories\GridRepository $gridRepository)
+    {
 		$this->gridRepository = $gridRepository;
-		$this->lang = $gridRepository->lang;
-		
 		$this->hidden = TRUE;
 	}
 	
-	protected function getItems($grid)
-	{
-		return $grid->parent->getDataSource();
-	}
-	
+    
+    abstract function addColumn($grid);
+    
 	protected function isHidden($grid, $column)
 	{
-		$gridEntity = $this->gridRepository->get(['type' => $grid->parent->getGridName()]);
+		$gridEntity = $this->gridRepository->get(['type' => $grid->getGridName()]);
 		return $gridEntity->getParameter($column)['hidden'];
 	}
+    
 }
