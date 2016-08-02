@@ -4,7 +4,7 @@ namespace Wame\DataGridControl;
 
 class GridProvider
 {
-	/** @var array */
+	/** @var BaseGridColumn[] */
 	private $columns = [];
 	
 	
@@ -14,6 +14,7 @@ class GridProvider
 		
 		return $this;
 	}
+    
 	
 	/**
 	 * Get columns from services

@@ -12,7 +12,7 @@ interface IDataGridControlFactory
 
 class DataGridControl extends DataGrid
 {
-	/** @var array */
+	/** @var GridProvider[] */
 	private $providers = [];
     
     /** @var mixin */
