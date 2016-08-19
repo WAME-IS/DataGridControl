@@ -1,18 +1,21 @@
 <?php
 
-namespace Wame\DataGridControl;
+namespace Wame\DataGridControl\Columns;
 
-class StatusGridColumn extends BaseGridColumn
+use Wame\DataGridControl\BaseGridItem;
+
+class Status extends BaseGridItem
 {
-    private $grid;
+    /** @var DataGridControl */
+    protected $grid;
     
     
-	public function addColumn($grid)
+    /** {@inheritDoc} */
+	public function render($grid)
     {
         $this->grid = $grid;
         
 		$grid->addColumnStatus('status', _('Status'))
-				->setTemplate(__DIR__ . '/../templates/column_status.latte')
 				->addOption(1, _('Published'))
 					->setIcon('check')
 					->setClass('btn-success')
@@ -26,6 +29,12 @@ class StatusGridColumn extends BaseGridColumn
 		return $grid;
 	}
 	
+    /**
+     * Status change callback
+     * 
+     * @param integer $id           id
+     * @param integer $new_status   new status
+     */
 	public function statusChange($id, $new_status)
 	{
         if($this->grid->getDataSource() instanceof \Doctrine\ORM\QueryBuilder) {

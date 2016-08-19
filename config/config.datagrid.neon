@@ -18,6 +18,13 @@ webloader:
                 - %appDir%/../vendor/ublaboo/datagrid/assets/dist/datagrid.min.css
                 - %appDir%/../vendor/ublaboo/datagrid/assets/dist/datagrid-spinners.min.css
                 - %appDir%/../vendor/wame/DataGridControl/assets/bootstrap-select/css/bootstrap-select.min.css
+        default:
+            files:
+                - %appDir%/../vendor/wame/DataGridControl/assets/happy/happy.min.css
+                - %appDir%/../vendor/wame/DataGridControl/assets/bootstrap-datepicker/css/bootstrap-datepicker3.min.css
+                - %appDir%/../vendor/ublaboo/datagrid/assets/dist/datagrid.min.css
+                - %appDir%/../vendor/ublaboo/datagrid/assets/dist/datagrid-spinners.min.css
+                - %appDir%/../vendor/wame/DataGridControl/assets/bootstrap-select/css/bootstrap-select.min.css
 
     js:
         admin:
@@ -27,3 +34,12 @@ webloader:
                 - %appDir%/../vendor/ublaboo/datagrid/assets/dist/datagrid.min.js
                 - %appDir%/../vendor/ublaboo/datagrid/assets/dist/datagrid-spinners.min.js
                 - %appDir%/../vendor/wame/DataGridControl/assets/bootstrap-select/js/bootstrap-select.min.js
+        default:
+            files:
+                - %appDir%/../vendor/wame/DataGridControl/assets/happy/happy.min.js
+                - %appDir%/../vendor/wame/DataGridControl/assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js
+                - %appDir%/../vendor/ublaboo/datagrid/assets/dist/datagrid.min.js
+                - %appDir%/../vendor/ublaboo/datagrid/assets/dist/datagrid-spinners.min.js
+                - %appDir%/../vendor/wame/DataGridControl/assets/bootstrap-select/js/bootstrap-select.min.js
+
+                

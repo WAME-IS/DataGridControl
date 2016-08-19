@@ -3,6 +3,7 @@
 namespace Wame\DataGridControl;
 
 use Ublaboo\DataGrid\DataGrid;
+use Wame\DataGridControl\Registers\DatagridRegister;
 
 interface IDataGridControlFactory
 {
@@ -12,37 +13,41 @@ interface IDataGridControlFactory
 
 class DataGridControl extends DataGrid
 {
-	/** @var GridProvider[] */
-	private $providers = [];
+    /** @var DatagridRegister */
+    private $register;
     
-    /** @var mixin */
-    private $dataSource;
     
-	
-	public function setProvider($provider)
-    {
-		$this->providers[] = $provider;
-		
-		return $this;
-	}
-    
-    public function setDataSource($source)
-    {
-        $this->dataSource = $source;
-        parent::setDataSource($source);
+    public function __construct(
+        \Nette\ComponentModel\IContainer 
+        $parent = NULL, 
+        $name = NULL
+    ) {
+        parent::__construct($parent, $name);
+        
+        $this->register = new DatagridRegister();
     }
     
-    public function getDataSource()
+    
+//    public function __call($method, $args)
+//    {
+//        $this->register->$method($args[0]);
+//    }
+    
+    public function add($service, $name = null)
     {
-        return $this->dataSource;
+        $this->register->add($service, $name);
     }
-
-
+    
+    public function remove($name)
+    {
+        $this->register->remove($name);
+    }
+    
     public function attached($presenter)
 	{
-        foreach($this->providers as $provider) {
-			$provider->getColumns($this);
-		}
+        foreach($this->register->getAll() as $column) {
+            $column->render($this);
+        }
         
         parent::attached($presenter);
 	}

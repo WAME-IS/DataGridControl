@@ -1,10 +1,13 @@
 <?php
 
-namespace Wame\DataGridControl;
+namespace Wame\DataGridControl\Actions;
 
-class EditModalGridAction extends BaseGridColumn
+use Wame\DataGridControl\BaseGridItem;
+
+class EditModal extends BaseGridItem
 {
-	public function addColumn($grid)
+    /** {@inheritDoc} */
+	public function render($grid)
 	{
 		$grid->addAction('edit', '', ":{$grid->presenter->getName()}:edit")
 			->setIcon('edit')
@@ -13,4 +16,5 @@ class EditModalGridAction extends BaseGridColumn
 		
 		return $grid;
 	}
+    
 }

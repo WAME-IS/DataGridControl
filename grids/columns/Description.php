@@ -1,13 +1,14 @@
 <?php
 
-namespace Wame\DataGridControl;
+namespace Wame\DataGridControl\Columns;
 
 use Nette\Utils\Html;
+use Wame\DataGridControl\BaseGridItem;
 
-
-class DescriptionGridColumn extends BaseGridColumn
+class Description extends BaseGridItem
 {
-	public function addColumn($grid) 
+    /** {@inheritDoc} */
+	public function render($grid) 
 	{
 		$grid->addColumnText('description', _('Description'))
 				->setRenderer(function($item) {

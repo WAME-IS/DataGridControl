@@ -1,10 +1,13 @@
 <?php
 
-namespace Wame\DataGridControl;
+namespace Wame\DataGridControl\Actions;
 
-class ShowGridAction extends BaseGridColumn
+use Wame\DataGridControl\BaseGridItem;
+
+class Show extends BaseGridItem
 {
-	public function addColumn($grid)
+    /** {@inheritDoc} */
+	public function render($grid)
 	{
 		$grid->addAction('show', '', ":{$grid->presenter->getName()}:show")
 			->setIcon('eye')
@@ -13,4 +16,5 @@ class ShowGridAction extends BaseGridColumn
 		
 		return $grid;
 	}
+    
 }

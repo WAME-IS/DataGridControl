@@ -1,10 +1,14 @@
 <?php
 
-namespace Wame\DataGridControl;
+namespace Wame\DataGridControl\Actions;
 
-class DeleteGridAction extends BaseGridColumn
+use Wame\DataGridControl\BaseGridItem;
+
+class Delete extends BaseGridItem
 {
-	public function addColumn($grid) {
+    /** {@inheritDoc} */
+	public function render($grid)
+    {
 		$grid->addAction('delete', '', ":{$grid->presenter->getName()}:delete")
 			->setIcon('trash')
 			->setTitle(_('Delete'))
@@ -12,4 +16,5 @@ class DeleteGridAction extends BaseGridColumn
 		
 		return $grid;
 	}
+    
 }

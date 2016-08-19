@@ -1,10 +1,13 @@
 <?php
 
-namespace Wame\DataGridControl;
+namespace Wame\DataGridControl\Columns;
 
-class PublishedGridColumn extends BaseGridColumn
+use Wame\DataGridControl\BaseGridItem;
+
+class Published extends BaseGridItem
 {
-	public function addColumn($grid) {
+    /** {@inheritDoc} */
+	public function render($grid) {
 		$grid->addColumnDateTime('publishedBy', _('Published by'), 'publishStartDate')
 //				->setSortable()
 				->setFilterDate();
