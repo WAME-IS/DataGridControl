@@ -45,8 +45,11 @@ class DataGridControl extends DataGrid
     
     public function attached($presenter)
 	{
-        foreach($this->register->getAll() as $column) {
-            $column->render($this);
+        foreach($this->register->getArray() as $item) {
+            $item['service']->render($this);
+//            foreach($item['parameters'] as $parameter) {
+//                
+//            }
         }
         
         parent::attached($presenter);

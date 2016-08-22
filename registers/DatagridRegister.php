@@ -2,9 +2,9 @@
 
 namespace Wame\DataGridControl\Registers;
 
-use Wame\Core\Registers\BaseRegister;
+use Wame\Core\Registers\PriorityRegister;
 
-class DatagridRegister extends BaseRegister
+class DatagridRegister extends PriorityRegister
 {
     public function __construct()
     {
