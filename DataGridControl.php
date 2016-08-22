@@ -33,9 +33,9 @@ class DataGridControl extends DataGrid
 //        $this->register->$method($args[0]);
 //    }
     
-    public function add($service, $name = null)
+    public function add($service, $name = null, $parameters = [])
     {
-        $this->register->add($service, $name);
+        $this->register->add($service, $name, $parameters);
     }
     
     public function remove($name)

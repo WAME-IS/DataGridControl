@@ -4,7 +4,7 @@ namespace Wame\DataGridControl\GroupActions;
 
 use Wame\DataGridControl\BaseGridItem;
 
-class Delete extends BaseGridItem
+class DeleteSelected extends BaseGridItem
 {
     /** @var DataGridControl */
     private $grid;
