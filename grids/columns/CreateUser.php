@@ -8,7 +8,7 @@ class CreateUser extends BaseGridItem
 {
     /** {@inheritDoc} */
 	public function render($grid) {
-		$grid->addColumnText('creator', _('Creator'), 'createUser.fullName')
+		$grid->addColumnText('createUser', _('Create user'), 'createUser.fullName')
 				->setFilterText();
 //				->setSortable();
 		
