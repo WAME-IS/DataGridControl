@@ -4,7 +4,7 @@ namespace Wame\DataGridControl\Columns;
 
 use Wame\DataGridControl\BaseGridItem;
 
-class TitleLinkShowGridColumn extends BaseGridItem
+class TitleLinkShow extends BaseGridItem
 {
     /** {@inheritDoc} */
 	public function render($grid) {

@@ -54,5 +54,15 @@ class DataGridControl extends DataGrid
         
         parent::attached($presenter);
 	}
+    
+    /**
+     * Get DataModel
+     * 
+     * @return DataModel
+     */
+    public function getDataModel()
+    {
+        return $this->dataModel;
+    }
 	
 }

@@ -37,18 +37,12 @@ class Status extends BaseGridItem
      */
 	public function statusChange($id, $new_status)
 	{
-        if($this->grid->getDataSource() instanceof \Doctrine\ORM\QueryBuilder) {
-            $query = $this->grid->getDataSource();
-            
-            $item = $query->andWhere("a.id = :id")
-                    ->setParameter('id', $id)
-                    ->getQuery()->getSingleResult();
-            
-            $item->status = $new_status;
-            
-            if ($this->grid->presenter->isAjax()) {
-                $this->grid->redrawItem($id);
-            }
+        $item = $this->grid->getDataModel()->getDataSource()->filterOne(['id' => $id])->getData()[0];
+        
+        $item->status = $new_status;
+        
+        if ($this->grid->presenter->isAjax()) {
+            $this->grid->redrawItem($id);
         }
 	}
     
