@@ -37,13 +37,24 @@ class Status extends BaseGridItem
      */
 	public function statusChange($id, $new_status)
 	{
-        $item = $this->grid->getDataModel()->getDataSource()->filterOne(['id' => $id])->getData()[0];
+        $entity = $this->getEntityById($id);
         
-        $item->status = $new_status;
+        $entity->status = $new_status;
         
         if ($this->grid->presenter->isAjax()) {
             $this->grid->redrawItem($id);
         }
 	}
+    
+    /**
+     * Get entity by id
+     * 
+     * @param integer $id   id
+     * @return BaseEntity
+     */
+    protected function getEntityById($id)
+    {
+        return $this->grid->getDataModel()->getDataSource()->filterOne(['id' => $id])->getData()[0];
+    }
     
 }
