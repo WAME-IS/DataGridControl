@@ -14,7 +14,7 @@ interface IDataGridControlFactory
 class DataGridControl extends DataGrid
 {
     /** @var DatagridRegister */
-    private $register;
+    protected $register;
     
     
     public function __construct(
@@ -45,6 +45,13 @@ class DataGridControl extends DataGrid
     
     public function attached($presenter)
 	{
+        $this->attach();
+        
+        parent::attached($presenter);
+	}
+    
+    public function attach()
+	{
         foreach($this->register->getArray() as $item) {
             $item['service']->render($this);
 //            foreach($item['parameters'] as $parameter) {
@@ -52,7 +59,7 @@ class DataGridControl extends DataGrid
 //            }
         }
         
-        parent::attached($presenter);
+        return $this;
 	}
     
     /**
