@@ -6,15 +6,10 @@ use Wame\DataGridControl\BaseGridItem;
 
 class DeleteSelected extends BaseGridItem
 {
-    /** @var DataGridControl */
-    private $grid;
-    
-    
     /** {@inheritDoc} */
-	public function render($grid) {
-        $this->grid;
-        
-        $grid->addGroupAction('Delete selected')->onSelect[] = [$this, 'deleteSelected'];
+	public function render($grid)
+    {
+        $grid->addGroupAction('Delete')->onSelect[] = [$this, 'deleteSelected'];
         
 		return $grid;
 	}
@@ -22,14 +17,25 @@ class DeleteSelected extends BaseGridItem
     /**
      * Delete selected callback
      */
-    public function deleteSelected()
+    public function deleteSelected(array $ids)
     {
-        // delete
+        $this->delete($ids);
         
-        if ($this->isAjax()) {
-            $this->grid->reload();
+        if ($this->getParent()->getPresenter()->isAjax()) {
+            $this->getParent()->reload();
         } else {
             $this->redirect('this');
+        }
+    }
+    
+    private function delete(array $ids)
+    {
+        $collection = new \Doctrine\Common\Collections\ArrayCollection($this->getParent()->getEntities());
+        $criteria = Criteria::create()->where(Criteria::expr()->in('id', $ids));
+        $selectedEntities = $collection->matching($criteria);
+        
+        foreach($selectedEntities as $entity) {
+            $entity->setStatus(0);
         }
     }
     
