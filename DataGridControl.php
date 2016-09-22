@@ -71,10 +71,6 @@ class DataGridControl extends DataGrid
         }
         
         parent::attached($presenter);
-        
-//        \Tracy\Debugger::barDump("datac");
-//        \Tracy\Debugger::barDump($this->getDataModel()->getDataSource()->getQuery());
-//        \Tracy\Debugger::barDump("===");
 	}
     
     /**
