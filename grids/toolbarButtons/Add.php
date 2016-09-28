@@ -24,6 +24,9 @@ class Add extends BaseGridItem
     /** @var string */
     private $link;
     
+    /** @var array */
+    private $linkParams = [];
+    
     /** @var string */
     private $title;
     
@@ -63,9 +66,10 @@ class Add extends BaseGridItem
      * @param string $link
      * @return \Wame\DataGridControl\ToolbarButtons\Add
      */
-    public function setLink($link)
+    public function setLink($link, $params = [])
     {
         $this->link = $link;
+        $this->linkParams = $params;
         
         return $this;
     }
@@ -135,6 +139,12 @@ class Add extends BaseGridItem
     }
     
     
+    private function getLinkParams()
+    {
+        return $this->linkParams;
+    }
+    
+    
     private function getTitle()
     {
         if ($this->title) {
@@ -151,7 +161,7 @@ class Add extends BaseGridItem
     /** {@inheritDoc} */
 	public function render($grid)
     {
-        $grid->addToolbarButton($this->getLink($grid), $this->getTitle())
+        $grid->addToolbarButton($this->getLink($grid), $this->getTitle(), $this->getLinkParams())
                 ->setIcon($this->getIcon())
                 ->setClass($this->getClass());
                 
