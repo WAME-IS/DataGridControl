@@ -12,6 +12,15 @@ class Add extends BaseGridItem
     /** @var string */
     protected $icon = 'fa fa-plus';
     
+    /** @var boolean */
+    protected $isAjaxModal = false;
+    
+    /** @var string */
+    protected $ajaxModalType = null;
+    
+    /** @var boolean */
+    protected $ajaxModalFixed = false;
+    
     /** @var string */
     private $link;
     
@@ -21,7 +30,13 @@ class Add extends BaseGridItem
     
     /** set **********************************************************************/
 
-
+    
+    /**
+     * Set button class
+     * 
+     * @param string $class
+     * @return \Wame\DataGridControl\ToolbarButtons\Add
+     */
     public function setClass($class)
     {
         $this->class = $class;
@@ -29,7 +44,12 @@ class Add extends BaseGridItem
         return $this;
     }
 
-
+    /**
+     * Set button icon
+     * 
+     * @param string $icon
+     * @return \Wame\DataGridControl\ToolbarButtons\Add
+     */
     public function setIcon($icon)
     {
         $this->icon = $icon;
@@ -37,7 +57,12 @@ class Add extends BaseGridItem
         return $this;
     }
 
-
+    /**
+     * Set button link
+     * 
+     * @param string $link
+     * @return \Wame\DataGridControl\ToolbarButtons\Add
+     */
     public function setLink($link)
     {
         $this->link = $link;
@@ -45,10 +70,32 @@ class Add extends BaseGridItem
         return $this;
     }
     
-    
+    /**
+     * Set button title
+     * 
+     * @param string $title
+     * @return \Wame\DataGridControl\ToolbarButtons\Add
+     */
     public function setTitle($title)
     {
         $this->title = $title;
+        
+        return $this;
+    }
+    
+    /**
+     * Open link in modal
+     * 
+     * @param string $type - sm - small modal, lg - large modal, null - normal modal
+     * @param boolean $fixed - true - fixed header
+     * @return \Wame\DataGridControl\ToolbarButtons\Add
+     */
+    public function isAjaxModal($type = null, $fixed = false)
+    {
+        $this->isAjaxModal = true;
+        
+        $this->ajaxModalType = $type;
+        $this->ajaxModalFixed = $fixed;
         
         return $this;
     }
@@ -59,7 +106,16 @@ class Add extends BaseGridItem
     
     private function getClass()
     {
-        return $this->class;
+        $class = $this->class;
+        
+        if ($this->isAjaxModal) { 
+            $class .= ' ajax-modal';
+            
+            if ($this->ajaxModalType) { $class .= ' ajax-modal-' . $this->ajaxModalType; }
+            if ($this->ajaxModalFixed) { $class .= ' ajax-modal-fixed'; }
+        }
+        
+        return $class;
     }
     
     
@@ -67,7 +123,7 @@ class Add extends BaseGridItem
     {
         return $this->icon;
     }
-    
+
     
     private function getLink($grid)
     {
