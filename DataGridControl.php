@@ -6,6 +6,8 @@ use Ublaboo\DataGrid\DataGrid;
 use Wame\DataGridControl\Registers\DatagridRegister;
 use Kdyby\Doctrine\QueryBuilder;
 use Kdyby\Doctrine\EntityManager;
+use Ublaboo\DataGrid\Exception\DataGridHasToBeAttachedToPresenterComponentException;
+use Nette\Application\UI\PresenterComponent;
 
 interface IDataGridControlFactory
 {
@@ -93,6 +95,21 @@ class DataGridControl extends DataGrid
     public function getEntities()
     {
         return $this->getDataModel()->getDataSource()->getData();
+    }
+    
+    /** {@inheritDoc} */
+    public function getParent()
+    {
+        $parent = $this->lookup(\Nette\Application\UI\Presenter::class);
+//        $parent = $this->getParent()->lookupPath(Nette\Application\UI\Control::class, FALSE);;
+
+		if (!($parent instanceof PresenterComponent)) {
+			throw new DataGridHasToBeAttachedToPresenterComponentException(
+				"DataGrid is attached to: '" . get_class($parent) . "', but instance of PresenterComponent is needed."
+			);
+		}
+
+		return $parent;
     }
 	
 }
