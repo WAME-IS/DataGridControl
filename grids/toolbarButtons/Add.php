@@ -6,6 +6,14 @@ use Wame\DataGridControl\BaseGridItem;
 
 class Add extends BaseGridItem
 {
+    const SMALL_MODAL = 'sm';
+    const MEDIUM_MODAL = null;
+    const LARGE_MODAL = 'lg';
+    
+    const FIXED_MODAL = true;
+    const NO_FIXED_MODAL = false;
+    
+    
     /** @var string */
     protected $class = 'btn btn-success';
     
