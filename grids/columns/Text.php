@@ -8,11 +8,11 @@ class Text extends BaseGridItem
 {
     /** {@inheritDoc} */
 	public function render($grid) {
-		$grid->addColumnText('text', _('text'))
+		$grid->addColumnText('text', _('Text'))
                 ->setSortable()
 				->setFilterText();
-                
+
 		return $grid;
 	}
-    
+
 }
