@@ -8,7 +8,8 @@ class Id extends BaseGridItem
 {
     /** {@inheritDoc} */
 	public function render($grid) {
-		$grid->addColumnText('id', _('ID'));
+		$grid->addColumnText('id', _('ID'))
+                ->setSortable();
 		
 		return $grid;
 	}
