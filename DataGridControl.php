@@ -26,6 +26,9 @@ class DataGridControl extends DataGrid
     /** @var EntityManager */
     private $entityManager;
     
+    /** @var array */
+    private $disableFilterItems;
+    
     
     public function __construct(
         EntityManager $entityManager,
@@ -79,6 +82,8 @@ class DataGridControl extends DataGrid
             // TODO: poriesit parametre
         }
         
+        $this->disableFilterColumns();
+        
         return $this;
 	}
     
@@ -117,20 +122,29 @@ class DataGridControl extends DataGrid
      * 
      * @param array|string $columns     columns
      */
-    public function disableFilter($columns = null)
+    private function disableFilterColumns()
     {
+        $columns = $this->disableFilterItems;
+                
         if(is_array($columns)) {
+            foreach($columns as $column) {
+                $this->getColumn($column)->setFilter(false);
+            }
+        } else if($columns = '*') {
+            $columns = $this->getColumns();
             foreach($columns as $column) {
                 $this->getColumn($column)->setFilter(false);
             }
         } else if(is_string($columns)) {
             $this->getColumn($columns)->setFilter(false);
-        } else {
-            $columns = $this->getColumns();
-            foreach($columns as $column) {
-                $this->getColumn($column)->setFilter(false);
-            }
         }
+    }
+    
+    public function disableFilter($columns = '*')
+    {
+        $this->disableFilterItems = $columns;
+        
+        return $this;
     }
 	
 }
