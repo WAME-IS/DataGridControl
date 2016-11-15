@@ -9,7 +9,7 @@ class EditModal extends BaseGridItem
     /** {@inheritDoc} */
 	public function render($grid)
 	{
-		$grid->addAction('edit', '', ":{$grid->presenter->getName()}:edit")
+		$grid->addAction('edit', '', ":{$grid->getRoute()}:edit")
 			->setIcon('edit')
 			->setTitle(_('Edit'))
 			->setClass('btn btn-xs btn-info ajax-modal ajax-modal-fixed');

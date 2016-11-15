@@ -26,8 +26,7 @@ class DataGridControl extends DataGrid
     /** @var EntityManager */
     private $entityManager;
     
-    /** @var array */
-    private $disableFilterItems;
+    private $route;
     
     
     public function __construct(
@@ -82,8 +81,6 @@ class DataGridControl extends DataGrid
             // TODO: poriesit parametre
         }
         
-        $this->disableFilterColumns();
-        
         return $this;
 	}
     
@@ -117,32 +114,14 @@ class DataGridControl extends DataGrid
 		return $parent;
     }
     
-    /**
-     * Disable filter
-     * 
-     * @param array|string $columns     columns
-     */
-    private function disableFilterColumns()
+    public function getRoute()
     {
-        $columns = $this->disableFilterItems;
-                
-        if(is_array($columns)) {
-            foreach($columns as $column) {
-                $this->getColumn($column)->setFilter(false);
-            }
-        } else if($columns = '*') {
-            $columns = $this->getColumns();
-            foreach($columns as $column) {
-                $column->setFilter(false);
-            }
-        } else if(is_string($columns)) {
-            $this->getColumn($columns)->setFilter(false);
-        }
+        return $this->route ?: $this->presenter->getName();
     }
     
-    public function disableFilter($columns = '*')
+    public function setRoute($route)
     {
-        $this->disableFilterItems = $columns;
+        $this->route = $route;
         
         return $this;
     }

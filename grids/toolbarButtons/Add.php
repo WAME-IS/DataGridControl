@@ -142,7 +142,7 @@ class Add extends BaseGridItem
         if ($this->link) {
             return $this->link;
         } else {
-            return ":{$grid->presenter->getName()}:create";
+            return ":{$grid->getRoute()}:create";
         }
     }
     
