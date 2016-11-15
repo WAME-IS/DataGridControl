@@ -111,5 +111,26 @@ class DataGridControl extends DataGrid
 
 		return $parent;
     }
+    
+    /**
+     * Disable filter
+     * 
+     * @param array|string $columns     columns
+     */
+    public function disableFilter($columns = null)
+    {
+        if(is_array($columns)) {
+            foreach($columns as $column) {
+                $this->getColumn($column)->setFilter(false);
+            }
+        } else if(is_string($columns)) {
+            $this->getColumn($columns)->setFilter(false);
+        } else {
+            $columns = $this->getColumns();
+            foreach($columns as $column) {
+                $this->getColumn($column)->setFilter(false);
+            }
+        }
+    }
 	
 }
