@@ -8,7 +8,7 @@ class TitleLinkEdit extends BaseGridItem
 {
     /** {@inheritDoc} */
 	public function render($grid) {
-		$grid->addColumnLink('title', _('Title'), ":{$grid->presenter->getName()}:edit", 'title')
+		$grid->addColumnLink('title', _('Title'), ":{$grid->getRoute()}:edit", 'title')
                 ->setSortable('l0.title')
 				->setFilterText(['l0.title']);
 		

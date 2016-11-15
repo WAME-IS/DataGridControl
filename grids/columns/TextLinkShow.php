@@ -9,7 +9,7 @@ class TextLinkShow extends BaseGridItem
     /** {@inheritDoc} */
 	public function render($grid)
     {
-		$grid->addColumnLink('text', _('Text'), ":{$grid->presenter->getName()}:show", 'text');
+		$grid->addColumnLink('text', _('Text'), ":{$grid->getRoute()}:show", 'text');
 		
 		return $grid;
 	}
