@@ -133,7 +133,7 @@ class DataGridControl extends DataGrid
         } else if($columns = '*') {
             $columns = $this->getColumns();
             foreach($columns as $column) {
-                $this->getColumn($column)->setFilter(false);
+                $column->setFilter(false);
             }
         } else if(is_string($columns)) {
             $this->getColumn($columns)->setFilter(false);
