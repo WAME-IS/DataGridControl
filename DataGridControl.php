@@ -64,11 +64,11 @@ class DataGridControl extends DataGrid
     }
     
     /** {@inheritDoc} */
-    public function attached($presenter)
+    public function attached($parent)
 	{
         $this->attach();
         
-        parent::attached($presenter);
+        parent::attached($parent);
 	}
     
     public function attach()
