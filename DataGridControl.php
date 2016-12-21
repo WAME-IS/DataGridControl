@@ -4,7 +4,6 @@ namespace Wame\DataGridControl;
 
 use Ublaboo\DataGrid\DataGrid;
 use Wame\DataGridControl\Registers\DatagridRegister;
-use Kdyby\Doctrine\QueryBuilder;
 use Kdyby\Doctrine\EntityManager;
 use Ublaboo\DataGrid\Exception\DataGridHasToBeAttachedToPresenterComponentException;
 use Nette\Application\UI\PresenterComponent;
@@ -26,6 +25,7 @@ class DataGridControl extends DataGrid
     /** @var EntityManager */
     private $entityManager;
     
+    /** @var string */
     private $route;
     
     
@@ -63,6 +63,11 @@ class DataGridControl extends DataGrid
         $this->register->remove($name);
     }
     
+    public function getLastColumn()
+    {
+        return !empty($this->columns) ? array_values(array_slice($this->columns, -1))[0] : null;
+    }
+    
     /** {@inheritDoc} */
     public function attached($parent)
 	{
@@ -74,11 +79,13 @@ class DataGridControl extends DataGrid
     public function attach()
 	{
         foreach($this->register->getArray() as $item) {
+            \Tracy\Debugger::barDump($item);
             $item['service']
                     ->setParent($this)
+                    ->setParameters($item['parameters'])
                     ->render($this);
             
-            // TODO: poriesit parametre
+            $item['service']->setVisilibity($this);
         }
         
         return $this;
@@ -103,7 +110,7 @@ class DataGridControl extends DataGrid
     public function getParent()
     {
         $parent = $this->lookup(\Nette\Application\UI\Presenter::class);
-//        $parent = $this->getParent()->lookupPath(Nette\Application\UI\Control::class, FALSE);;
+//        $parent = $this->getParent()->lookupPath(Nette\Application\UI\Control::class, FALSE);
 
 		if (!($parent instanceof PresenterComponent)) {
 			throw new DataGridHasToBeAttachedToPresenterComponentException(

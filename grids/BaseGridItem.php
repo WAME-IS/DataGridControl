@@ -7,8 +7,14 @@ use Wame\DataGridControl\Exceptions\BaseGridItemHasToBeAttachedToDataGridControl
 
 abstract class BaseGridItem
 {
+    const ATTRIBUTE_DATA_GRID = 'data-wame-grid';
+    
+    
     /** @var DataGridControl */
     private $parent;
+    
+    /** @var array */
+    private $parameters;
     
     
     /**
@@ -48,5 +54,36 @@ abstract class BaseGridItem
      * @param DataGridControl $grid   data grid control
      */
     abstract public function render($grid);
+    
+    public function setParameters($parameters)
+    {
+        $this->parameters = $parameters;
+        
+        return $this;
+    }
+    
+    public function setVisibility($grid)
+    {
+        $item = $grid->getLastColumn();
+        
+        if($item) {
+            $wameGrid = [];
+            
+            if(isset($this->parameters['show'])) {
+                $wameGrid['show'] = $this->parameters['show'];
+            }
+            
+            if(isset($this->parameters['hide'])) {
+                $wameGrid['hide'] = $this->parameters['hide'];
+            }
+            
+            if($wameGrid) {
+                $item->getElementPrototype('th')->addAttributes([self::ATTRIBUTE_DATA_GRID => json_encode($wameGrid)]);
+                $item->getElementPrototype('td')->addAttributes([self::ATTRIBUTE_DATA_GRID => json_encode($wameGrid)]);
+            }
+        }
+        
+        return $grid;
+    }
     
 }
