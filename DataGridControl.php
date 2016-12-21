@@ -28,6 +28,9 @@ class DataGridControl extends DataGrid
     /** @var string */
     private $route;
     
+    /** @var array */
+    private $dataParameters;
+    
     
     public function __construct(
         EntityManager $entityManager,
@@ -61,6 +64,21 @@ class DataGridControl extends DataGrid
     public function remove($name)
     {
         $this->register->remove($name);
+    }
+    
+    public function setDataParameters($parameters)
+    {
+        $this->dataParameters = $parameters;
+    }
+    
+    public function getDataParameters()
+    {
+        return $this->dataParameters;
+    }
+    
+    public function getDataParameter($parameterName)
+    {
+        return $this->dataParameters[$parameterName];
     }
     
     public function getLastColumn()

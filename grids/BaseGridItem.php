@@ -7,6 +7,9 @@ use Wame\DataGridControl\Exceptions\BaseGridItemHasToBeAttachedToDataGridControl
 
 abstract class BaseGridItem
 {
+    use \Wame\Core\Traits\TRegister;
+    
+    
     const ATTRIBUTE_DATA_GRID = 'data-wame-grid';
     
     
