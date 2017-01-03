@@ -97,13 +97,12 @@ class DataGridControl extends DataGrid
     public function attach()
 	{
         foreach($this->register->getArray() as $item) {
-            \Tracy\Debugger::barDump($item);
             $item['service']
                     ->setParent($this)
                     ->setParameters($item['parameters'])
                     ->render($this);
-            
-            $item['service']->setVisilibity($this);
+
+            $item['service']->setVisibility($this);
         }
         
         return $this;
