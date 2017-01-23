@@ -2,6 +2,12 @@
 
 namespace Wame\DataGridControl;
 
+/**
+ * Class GridProvider
+ *
+ * @package Wame\DataGridControl
+ * @deprecated
+ */
 class GridProvider
 {
 	/** @var BaseGridColumn[] */

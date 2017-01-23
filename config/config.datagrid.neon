@@ -5,9 +5,13 @@ services:
     # Repositories
     - Wame\DataGridControl\Repositories\GridRepository
 
+
+
 doctrine:
     metadata:
         Wame\DataGridControl\Entities: %appDir%/../vendor/wame/DataGridControl/entities
+
+
 
 webloader:
     css:

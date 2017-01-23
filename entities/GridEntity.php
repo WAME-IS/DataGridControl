@@ -3,18 +3,22 @@
 namespace Wame\DataGridControl\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
+use Wame\Core\Entities\BaseEntity;
+use Wame\Core\Entities\Columns;
 
 /**
  * @ORM\Table(name="wame_grid")
  * @ORM\Entity
  */
-class GridEntity extends \Wame\Core\Entities\BaseEntity 
+class GridEntity extends BaseEntity
 {
-	use \Wame\Core\Entities\Columns\Identifier;
-	use \Wame\Core\Entities\Columns\Parameters;
-	
+	use Columns\Identifier;
+	use Columns\Parameters;
+
+
 	/**
 	 * @ORM\Column(name="type", type="string", nullable=false)
 	 */
 	protected $type;
+
 }

@@ -2,7 +2,9 @@
 
 namespace Wame\DataGridControl;
 
+use Nette\ComponentModel\IContainer;
 use Ublaboo\DataGrid\DataGrid;
+use Ublaboo\DataGrid\DataModel;
 use Wame\DataGridControl\Registers\DatagridRegister;
 use Kdyby\Doctrine\EntityManager;
 use Ublaboo\DataGrid\Exception\DataGridHasToBeAttachedToPresenterComponentException;
@@ -19,9 +21,6 @@ class DataGridControl extends DataGrid
     /** @var DatagridRegister */
     protected $register;
     
-    /** @var BaseEntity */
-    private $source;
-    
     /** @var EntityManager */
     private $entityManager;
     
@@ -34,7 +33,7 @@ class DataGridControl extends DataGrid
     
     public function __construct(
         EntityManager $entityManager,
-        \Nette\ComponentModel\IContainer $parent = NULL, 
+        IContainer $parent = NULL,
         $name = NULL
     ) {
         parent::__construct($parent, $name);
@@ -43,7 +42,9 @@ class DataGridControl extends DataGrid
         $this->register = new DatagridRegister();
     }
     
-    
+
+    /** register **************************************************************/
+
     /**
      * Add
      * 
@@ -65,22 +66,38 @@ class DataGridControl extends DataGrid
     {
         $this->register->remove($name);
     }
-    
-    public function setDataParameters($parameters)
-    {
-        $this->dataParameters = $parameters;
-    }
-    
+
+
+    /** get & set *************************************************************/
+
+    /**
+     * @return array
+     */
     public function getDataParameters()
     {
         return $this->dataParameters;
     }
-    
+
+    /**
+     * @param $parameters
+     */
+    public function setDataParameters($parameters)
+    {
+        $this->dataParameters = $parameters;
+    }
+
+    /**
+     * @param $parameterName
+     * @return mixed
+     */
     public function getDataParameter($parameterName)
     {
         return $this->dataParameters[$parameterName];
     }
-    
+
+    /**
+     * @return null
+     */
     public function getLastColumn()
     {
         return !empty($this->columns) ? array_values(array_slice($this->columns, -1))[0] : null;
@@ -93,16 +110,22 @@ class DataGridControl extends DataGrid
         
         parent::attached($parent);
 	}
-    
+
+    /**
+     * Attach
+     *
+     * @return $this
+     */
     public function attach()
 	{
         foreach($this->register->getArray() as $item) {
-            $item['service']
-                    ->setParent($this)
+            $service = $item['service'];
+
+            $service->setParent($this)
                     ->setParameters($item['parameters'])
                     ->render($this);
 
-            $item['service']->setVisibility($this);
+            $service->setVisibility($this);
         }
         
         return $this;
@@ -117,37 +140,47 @@ class DataGridControl extends DataGrid
     {
         return $this->dataModel;
     }
-    
+
+    /**
+     * @return array
+     */
     public function getEntities()
     {
         return $this->getDataModel()->getDataSource()->getData();
     }
-    
-    /** {@inheritDoc} */
-    public function getParent()
-    {
-        $parent = $this->lookup(\Nette\Application\UI\Presenter::class);
-//        $parent = $this->getParent()->lookupPath(Nette\Application\UI\Control::class, FALSE);
 
-		if (!($parent instanceof PresenterComponent)) {
-			throw new DataGridHasToBeAttachedToPresenterComponentException(
-				"DataGrid is attached to: '" . get_class($parent) . "', but instance of PresenterComponent is needed."
-			);
-		}
-
-		return $parent;
-    }
-    
+    /**
+     * @return string
+     */
     public function getRoute()
     {
         return $this->route ?: $this->presenter->getName();
     }
-    
+
+    /**
+     * @param $route
+     * @return $this
+     */
     public function setRoute($route)
     {
         $this->route = $route;
         
         return $this;
+    }
+
+
+    /** {@inheritDoc} */
+    public function getParent()
+    {
+        $parent = $this->lookup('\Nette\Application\UI\Presenter');
+
+        if (!($parent instanceof PresenterComponent)) {
+            throw new DataGridHasToBeAttachedToPresenterComponentException(
+                "DataGrid is attached to: '" . get_class($parent) . "', but instance of PresenterComponent is needed."
+            );
+        }
+
+        return $parent;
     }
 	
 }
