@@ -40,6 +40,8 @@ class DataGridControl extends DataGrid
         
         $this->entityManager = $entityManager;
         $this->register = new DatagridRegister();
+
+        $this->setSortableHandler('grid:rowSort!');
     }
     
 
@@ -182,5 +184,21 @@ class DataGridControl extends DataGrid
 
         return $parent;
     }
-	
+
+
+    /** handles *******************************************************************************************************/
+
+    /**
+     * @param  int      $item_id
+     * @param  int|NULL $prev_id
+     * @param  int|NULL $next_id
+     * @return void
+     */
+    public function handleRowSort($item_id, $prev_id, $next_id)
+    {
+        // Todo: podané issue https://wame.teamwork.com/#tasks/8473950?c=3520654
+        dump('Todo: podané issue https://wame.teamwork.com/#tasks/8473950?c=3520654');
+        exit;
+    }
+
 }

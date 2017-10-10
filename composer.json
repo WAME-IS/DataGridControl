@@ -15,7 +15,7 @@
     ],
     "config": { "secure-http": false },
     "require": {
-        "ublaboo/datagrid": "v5.4.2",
+        "ublaboo/datagrid": "v5.4.5",
         "wame/Core": ">=0.0.1"
     },
     "autoload": {
