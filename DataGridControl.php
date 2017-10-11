@@ -34,14 +34,14 @@ class DataGridControl extends DataGrid
     public function __construct(
         EntityManager $entityManager,
         IContainer $parent = NULL,
-        $name = NULL
+        $name = 'grid'
     ) {
         parent::__construct($parent, $name);
         
         $this->entityManager = $entityManager;
         $this->register = new DatagridRegister();
 
-        $this->setSortableHandler('grid:rowSort!');
+        $this->setSortableHandler($this->getName() . ':rowSort!');
     }
     
 
@@ -188,17 +188,14 @@ class DataGridControl extends DataGrid
 
     /** handles *******************************************************************************************************/
 
-    /**
-     * @param  int      $item_id
-     * @param  int|NULL $prev_id
-     * @param  int|NULL $next_id
-     * @return void
-     */
-    public function handleRowSort($item_id, $prev_id, $next_id)
+    public function handleRowSort()
     {
-        // Todo: podané issue https://wame.teamwork.com/#tasks/8473950?c=3520654
-        dump('Todo: podané issue https://wame.teamwork.com/#tasks/8473950?c=3520654');
-        exit;
+        $presenter = $this->getPresenter();
+        $itemId = $presenter->getParameter('item_id');
+        $prevId = $presenter->getParameter('prev_id');
+        $nextId = $presenter->getParameter('next_id');
+
+        return $presenter->repository->move($itemId, $prevId, $nextId);
     }
 
 }
