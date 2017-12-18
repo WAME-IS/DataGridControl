@@ -4,6 +4,7 @@ namespace Wame\DataGridControl\Columns;
 
 use Wame\DataGridControl\BaseGridItem;
 
+
 class TextLinkShow extends BaseGridItem
 {
     /** {@inheritDoc} */

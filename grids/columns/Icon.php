@@ -5,10 +5,12 @@ namespace Wame\DataGridControl\Columns;
 use Nette\Utils\Html;
 use Wame\DataGridControl\BaseGridItem;
 
+
 class Icon extends BaseGridItem
 {
     /** {@inheritDoc} */
-	public function render($grid) {
+	public function render($grid)
+    {
         $grid->addColumnText('icon', _('Icon'))
                 ->setRenderer(function($item) {
                     return Html::el('span')->addAttributes([

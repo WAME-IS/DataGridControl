@@ -5,6 +5,7 @@ namespace Wame\DataGridControl\Columns;
 use Nette\Utils\Html;
 use Wame\DataGridControl\BaseGridItem;
 
+
 class Description extends BaseGridItem
 {
     /** {@inheritDoc} */

@@ -28,6 +28,7 @@ class Status extends BaseGridItem
 		
 		return $grid;
 	}
+
 	
     /**
      * Status change callback
@@ -45,7 +46,8 @@ class Status extends BaseGridItem
             $this->grid->redrawItem($id);
         }
 	}
-    
+
+
     /**
      * Get entity by id
      * 

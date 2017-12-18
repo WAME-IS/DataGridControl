@@ -2,13 +2,17 @@
 
 namespace Wame\DataGridControl\Columns;
 
-use Wame\DataGridControl\BaseGridColumn;
+use Wame\DataGridControl\BaseGridItem;
 
-class NameLinkShowGridColumn extends BaseGridColumn
+
+class NameLinkShowGridColumn extends BaseGridItem
 {
-	public function addColumn($grid) {
-		$grid->addColumnLink('name', 'Name', ":{$grid->getRoute()}:show");
+    /** {@inheritDoc} */
+	public function render($grid)
+    {
+		$grid->addColumnLink('name', _('Name'), ":{$grid->getRoute()}:show");
 		
 		return $grid;
 	}
+
 }
